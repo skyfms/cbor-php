@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -25,23 +23,23 @@ abstract class AbstractCBORObject implements CBORObject
      */
     protected $additionalInformation;
 
-    public function __construct(int $majorType, int $additionalInformation)
+    public function __construct($majorType, $additionalInformation)
     {
         $this->majorType = $majorType;
         $this->additionalInformation = $additionalInformation;
     }
 
-    public function getMajorType(): int
+    public function getMajorType()
     {
         return $this->majorType;
     }
 
-    public function getAdditionalInformation(): int
+    public function getAdditionalInformation()
     {
         return $this->additionalInformation;
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         return \chr($this->majorType << 5 | $this->additionalInformation);
     }

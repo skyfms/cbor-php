@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -15,8 +13,8 @@ namespace CBOR;
 
 final class ByteStringWithChunkObject extends AbstractCBORObject
 {
-    private const MAJOR_TYPE = 0b010;
-    private const ADDITIONAL_INFORMATION = 0b00011111;
+     const MAJOR_TYPE = 0b010;
+     const ADDITIONAL_INFORMATION = 0b00011111;
 
     /**
      * @var ByteStringObject[]
@@ -28,17 +26,17 @@ final class ByteStringWithChunkObject extends AbstractCBORObject
         parent::__construct(self::MAJOR_TYPE, self::ADDITIONAL_INFORMATION);
     }
 
-    public function add(ByteStringObject $chunk): void
+    public function add(ByteStringObject $chunk)
     {
         $this->chunks[] = $chunk;
     }
 
-    public function append(string $chunk): void
+    public function append($chunk)
     {
         $this->add(new ByteStringObject($chunk));
     }
 
-    public function getValue(): string
+    public function getValue()
     {
         $result = '';
         foreach ($this->chunks as $chunk) {
@@ -48,7 +46,7 @@ final class ByteStringWithChunkObject extends AbstractCBORObject
         return $result;
     }
 
-    public function getLength(): int
+    public function getLength()
     {
         $length = 0;
         foreach ($this->chunks as $chunk) {
@@ -58,7 +56,7 @@ final class ByteStringWithChunkObject extends AbstractCBORObject
         return $length;
     }
 
-    public function getNormalizedData(bool $ignoreTags = false): string
+    public function getNormalizedData($ignoreTags = false)
     {
         $result = '';
         foreach ($this->chunks as $chunk) {
@@ -68,7 +66,7 @@ final class ByteStringWithChunkObject extends AbstractCBORObject
         return $result;
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         $result = parent::__toString();
         foreach ($this->chunks as $chunk) {

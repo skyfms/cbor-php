@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -15,14 +13,14 @@ namespace CBOR;
 
 interface CBORObject
 {
-    public function getMajorType(): int;
+    public function getMajorType();
 
-    public function getAdditionalInformation(): int;
+    public function getAdditionalInformation();
 
     /**
      * @return mixed|null
      */
-    public function getNormalizedData(bool $ignoreTags = false);
+    public function getNormalizedData($ignoreTags = false);
 
-    public function __toString(): string;
+    public function __toString();
 }

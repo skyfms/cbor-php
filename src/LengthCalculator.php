@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -15,7 +13,7 @@ namespace CBOR;
 
 final class LengthCalculator
 {
-    public static function getLengthOfString(string $data): array
+    public static function getLengthOfString($data): array
     {
         $length = mb_strlen($data, '8bit');
 
@@ -29,7 +27,7 @@ final class LengthCalculator
         return self::computeLength($length);
     }
 
-    private static function computeLength(int $length): array
+    private static function computeLength($length): array
     {
         switch (true) {
             case $length < 24:
@@ -47,7 +45,7 @@ final class LengthCalculator
         }
     }
 
-    private static function fixHexLength(string $data): string
+    private static function fixHexLength($data)
     {
         return 0 === (mb_strlen($data, '8bit') % 2) ? $data : '0'.$data;
     }

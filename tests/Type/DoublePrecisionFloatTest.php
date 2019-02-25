@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -20,7 +18,7 @@ final class DoublePrecisionFloatTest extends BaseTestCase
     /**
      * @test
      */
-    public function aDoublePrecisionObjectCanBeCreated(): void
+    public function aDoublePrecisionObjectCanBeCreated()
     {
         $obj = DoublePrecisionFloatObject::create(\Safe\hex2bin('3fd5555555555555'));
         static::assertEquals(1 / 3, $obj->getNormalizedData());

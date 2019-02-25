@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -22,7 +20,7 @@ final class SignedIntegerTest extends BaseTestCase
      * @test
      * @dataProvider getValidValue
      */
-    public function createOnValidValue(int $intValue, string $expectedIntValue, int $expectedMajorType, int $expectedAdditionalInformation): void
+    public function createOnValidValue($intValue, $expectedIntValue, $expectedMajorType, $expectedAdditionalInformation)
     {
         $unsignedInteger = SignedIntegerObject::createFromGmpValue(gmp_init($intValue));
         static::assertEquals($expectedIntValue, $unsignedInteger->getValue());
@@ -71,7 +69,7 @@ final class SignedIntegerTest extends BaseTestCase
      * @expectedException        \InvalidArgumentException
      * @expectedExceptionMessage The value must be a negative integer.
      */
-    public function ceateOnNegativeValue(): void
+    public function ceateOnNegativeValue()
     {
         SignedIntegerObject::createFromGmpValue(gmp_init(1));
     }
@@ -81,7 +79,7 @@ final class SignedIntegerTest extends BaseTestCase
      * @expectedException        \InvalidArgumentException
      * @expectedExceptionMessage Out of range. Please use NegativeBigIntegerTag tag with ByteStringObject object instead.
      */
-    public function createOnOutOfRangeValue(): void
+    public function createOnOutOfRangeValue()
     {
         SignedIntegerObject::createFromGmpValue(gmp_init(-4294967297));
     }
@@ -90,7 +88,7 @@ final class SignedIntegerTest extends BaseTestCase
      * @test
      * @dataProvider getDataSet
      */
-    public function anUnsignedIntegerCanBeEncodedAndDecoded(string $data, string $expectedNormalizedData): void
+    public function anUnsignedIntegerCanBeEncodedAndDecoded($data, $expectedNormalizedData)
     {
         $stream = new StringStream(\Safe\hex2bin($data));
         $object = $this->getDecoder()->decode($stream);

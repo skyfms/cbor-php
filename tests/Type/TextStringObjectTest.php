@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -25,7 +23,7 @@ final class TextStringObjectTest extends BaseTestCase
      * @test
      * @dataProvider getData
      */
-    public function aTextStringObjectCanBeCreated(string $string, int $expectedAdditionalInformation, int $expectedLength, string $expectedEncodedObject): void
+    public function aTextStringObjectCanBeCreated($string, $expectedAdditionalInformation, $expectedLength, $expectedEncodedObject)
     {
         $object = new TextStringObject($string);
 

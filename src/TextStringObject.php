@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -15,7 +13,7 @@ namespace CBOR;
 
 final class TextStringObject extends AbstractCBORObject
 {
-    private const MAJOR_TYPE = 0b011;
+     const MAJOR_TYPE = 0b011;
 
     /**
      * @var int|null
@@ -27,7 +25,7 @@ final class TextStringObject extends AbstractCBORObject
      */
     private $data;
 
-    public function __construct(string $data)
+    public function __construct($data)
     {
         list($additionalInformation, $length) = LengthCalculator::getLengthOfString($data);
 
@@ -36,22 +34,22 @@ final class TextStringObject extends AbstractCBORObject
         $this->length = $length;
     }
 
-    public function getValue(): string
+    public function getValue()
     {
         return $this->data;
     }
 
-    public function getLength(): int
+    public function getLength()
     {
         return mb_strlen($this->data, 'utf8');
     }
 
-    public function getNormalizedData(bool $ignoreTags = false): string
+    public function getNormalizedData($ignoreTags = false)
     {
         return $this->data;
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         $result = parent::__toString();
         if (null !== $this->length) {

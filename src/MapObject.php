@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -15,7 +13,7 @@ namespace CBOR;
 
 final class MapObject extends AbstractCBORObject implements \Countable, \IteratorAggregate
 {
-    private const MAJOR_TYPE = 0b101;
+    const MAJOR_TYPE = 0b101;
 
     /**
      * @var MapItem[]
@@ -44,13 +42,13 @@ final class MapObject extends AbstractCBORObject implements \Countable, \Iterato
         $this->length = $length;
     }
 
-    public function add(CBORObject $key, CBORObject $value): void
+    public function add(CBORObject $key, CBORObject $value)
     {
         $this->data[] = new MapItem($key, $value);
         list($this->additionalInformation, $this->length) = LengthCalculator::getLengthOfArray($this->data);
     }
 
-    public function count(): int
+    public function count()
     {
         return \count($this->data);
     }
@@ -60,7 +58,7 @@ final class MapObject extends AbstractCBORObject implements \Countable, \Iterato
         return new \ArrayIterator($this->data);
     }
 
-    public function getNormalizedData(bool $ignoreTags = false): array
+    public function getNormalizedData($ignoreTags = false): array
     {
         $result = [];
         foreach ($this->data as $object) {
@@ -70,7 +68,7 @@ final class MapObject extends AbstractCBORObject implements \Countable, \Iterato
         return $result;
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         $result = parent::__toString();
         if (null !== $this->length) {

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -25,7 +23,7 @@ final class ByteStringObjectTest extends BaseTestCase
      * @test
      * @dataProvider getData
      */
-    public function aByteStringObjectCanBeCreated(string $string, int $expectedAdditionalInformation, int $expectedLength, string $expectedEncodedObject): void
+    public function aByteStringObjectCanBeCreated($string, $expectedAdditionalInformation, $expectedLength, $expectedEncodedObject)
     {
         $object = new ByteStringObject($string);
 

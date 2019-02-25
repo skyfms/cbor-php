@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -15,7 +13,7 @@ namespace CBOR;
 
 abstract class OtherObject extends AbstractCBORObject
 {
-    private const MAJOR_TYPE = 0b111;
+     const MAJOR_TYPE = 0b111;
 
     /**
      * @var string|null
@@ -27,15 +25,15 @@ abstract class OtherObject extends AbstractCBORObject
      */
     abstract public static function supportedAdditionalInformation(): array;
 
-    abstract public static function createFromLoadedData(int $additionalInformation, ?string $data): self;
+    abstract public static function createFromLoadedData($additionalInformation, $data): self;
 
-    public function __construct(int $additionalInformation, ?string $data)
+    public function __construct($additionalInformation, $data)
     {
         parent::__construct(self::MAJOR_TYPE, $additionalInformation);
         $this->data = $data;
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         $result = parent::__toString();
         if (null !== $this->data) {

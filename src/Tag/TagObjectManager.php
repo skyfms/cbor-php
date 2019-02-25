@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -24,7 +22,7 @@ class TagObjectManager
      */
     private $classes = [];
 
-    public function add(string $class): void
+    public function add($class)
     {
         if ($class::getTagId() < 0) {
             throw new \InvalidArgumentException('Invalid tag ID.');
@@ -32,12 +30,12 @@ class TagObjectManager
         $this->classes[$class::getTagId()] = $class;
     }
 
-    public function getClassForValue(int $value): string
+    public function getClassForValue($value)
     {
         return array_key_exists($value, $this->classes) ? $this->classes[$value] : GenericTag::class;
     }
 
-    public function createObjectForValue(int $additionalInformation, ?string $data, CBORObject $object): TagObject
+    public function createObjectForValue($additionalInformation, $data, CBORObject $object): TagObject
     {
         $value = $additionalInformation;
         if ($additionalInformation >= 24) {

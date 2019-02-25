@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -15,8 +13,8 @@ namespace CBOR;
 
 final class InfiniteMapObject extends AbstractCBORObject implements \Countable, \IteratorAggregate
 {
-    private const MAJOR_TYPE = 0b101;
-    private const ADDITIONAL_INFORMATION = 0b00011111;
+     const MAJOR_TYPE = 0b101;
+     const ADDITIONAL_INFORMATION = 0b00011111;
 
     /**
      * @var MapItem[]
@@ -28,12 +26,12 @@ final class InfiniteMapObject extends AbstractCBORObject implements \Countable, 
         parent::__construct(self::MAJOR_TYPE, self::ADDITIONAL_INFORMATION);
     }
 
-    public function append(CBORObject $key, CBORObject $value): void
+    public function append(CBORObject $key, CBORObject $value)
     {
         $this->data[] = new MapItem($key, $value);
     }
 
-    public function count(): int
+    public function count()
     {
         return \count($this->data);
     }
@@ -43,7 +41,7 @@ final class InfiniteMapObject extends AbstractCBORObject implements \Countable, 
         return new \ArrayIterator($this->data);
     }
 
-    public function getNormalizedData(bool $ignoreTags = false): array
+    public function getNormalizedData($ignoreTags = false): array
     {
         $result = [];
         foreach ($this->data as $object) {
@@ -53,7 +51,7 @@ final class InfiniteMapObject extends AbstractCBORObject implements \Countable, 
         return $result;
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         $result = parent::__toString();
         foreach ($this->data as $object) {

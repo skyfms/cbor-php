@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -25,7 +23,7 @@ final class ByteStringWithChunkObjectTest extends BaseTestCase
      * @test
      * @dataProvider getData
      */
-    public function aByteStringWithChunkObjectCanBeCreated(array $chunks, int $expectedLength, string $expectedValue, string $expectedEncodedObject): void
+    public function aByteStringWithChunkObjectCanBeCreated(array $chunks, $expectedLength, $expectedValue, $expectedEncodedObject)
     {
         $object = new ByteStringWithChunkObject();
         foreach ($chunks as $chunk) {

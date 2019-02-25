@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -15,7 +13,7 @@ namespace CBOR;
 
 class ListObject extends AbstractCBORObject implements \Countable, \IteratorAggregate
 {
-    private const MAJOR_TYPE = 0b100;
+     const MAJOR_TYPE = 0b100;
 
     /**
      * @var CBORObject[]
@@ -44,13 +42,13 @@ class ListObject extends AbstractCBORObject implements \Countable, \IteratorAggr
         $this->length = $length;
     }
 
-    public function add(CBORObject $object): void
+    public function add(CBORObject $object)
     {
         $this->data[] = $object;
         list($this->additionalInformation, $this->length) = LengthCalculator::getLengthOfArray($this->data);
     }
 
-    public function get(int $index): CBORObject
+    public function get($index): CBORObject
     {
         if (!array_key_exists($index, $this->data)) {
             throw new \InvalidArgumentException('Index not found.');
@@ -59,14 +57,14 @@ class ListObject extends AbstractCBORObject implements \Countable, \IteratorAggr
         return $this->data[$index];
     }
 
-    public function getNormalizedData(bool $ignoreTags = false): array
+    public function getNormalizedData($ignoreTags = false): array
     {
         return array_map(function (CBORObject $item) use ($ignoreTags) {
             return $item->getNormalizedData($ignoreTags);
         }, $this->data);
     }
 
-    public function count(): int
+    public function count()
     {
         return \count($this->data);
     }
@@ -76,7 +74,7 @@ class ListObject extends AbstractCBORObject implements \Countable, \IteratorAggr
         return new \ArrayIterator($this->data);
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         $result = parent::__toString();
         if (null !== $this->length) {

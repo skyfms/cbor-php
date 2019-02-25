@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -20,7 +18,7 @@ final class StringStream implements Stream
      */
     private $resource;
 
-    public function __construct(string $data)
+    public function __construct($data)
     {
         $resource = \Safe\fopen('php://memory', 'r+');
         \Safe\fwrite($resource, $data);
@@ -28,7 +26,7 @@ final class StringStream implements Stream
         $this->resource = $resource;
     }
 
-    public function read(int $length): string
+    public function read($length)
     {
         if (0 === $length) {
             return '';

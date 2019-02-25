@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -23,7 +21,7 @@ final class SinglePrecisionFloatObject extends Base
         return [26];
     }
 
-    public static function createFromLoadedData(int $additionalInformation, ?string $data): Base
+    public static function createFromLoadedData($additionalInformation, $data): Base
     {
         return new self($additionalInformation, $data);
     }
@@ -31,7 +29,7 @@ final class SinglePrecisionFloatObject extends Base
     /**
      * @return SinglePrecisionFloatObject
      */
-    public static function create(string $value): self
+    public static function create($value): self
     {
         if (4 !== mb_strlen($value, '8bit')) {
             throw new \InvalidArgumentException('The value is not a valid single precision floating point');
@@ -40,7 +38,7 @@ final class SinglePrecisionFloatObject extends Base
         return new self(26, $value);
     }
 
-    public function getNormalizedData(bool $ignoreTags = false)
+    public function getNormalizedData($ignoreTags = false)
     {
         $data = $this->data;
         Assertion::string($data, 'Invalid data');
@@ -59,7 +57,7 @@ final class SinglePrecisionFloatObject extends Base
         return 1 === ($single >> 31) ? -$val : $val;
     }
 
-    public function getExponent(): int
+    public function getExponent()
     {
         $data = $this->data;
         Assertion::string($data, 'Invalid data');
@@ -68,7 +66,7 @@ final class SinglePrecisionFloatObject extends Base
         return ($single >> 23) & 0xff;
     }
 
-    public function getMantissa(): int
+    public function getMantissa()
     {
         $data = $this->data;
         Assertion::string($data, 'Invalid data');
@@ -77,7 +75,7 @@ final class SinglePrecisionFloatObject extends Base
         return $single & 0x7fffff;
     }
 
-    public function getSign(): int
+    public function getSign()
     {
         $data = $this->data;
         Assertion::string($data, 'Invalid data');

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -15,8 +13,8 @@ namespace CBOR;
 
 final class TextStringWithChunkObject extends AbstractCBORObject
 {
-    private const MAJOR_TYPE = 0b011;
-    private const ADDITIONAL_INFORMATION = 0b00011111;
+     const MAJOR_TYPE = 0b011;
+     const ADDITIONAL_INFORMATION = 0b00011111;
 
     /**
      * @var TextStringObject[]
@@ -28,17 +26,17 @@ final class TextStringWithChunkObject extends AbstractCBORObject
         parent::__construct(self::MAJOR_TYPE, self::ADDITIONAL_INFORMATION);
     }
 
-    public function add(TextStringObject $chunk): void
+    public function add(TextStringObject $chunk)
     {
         $this->data[] = $chunk;
     }
 
-    public function append(string $chunk): void
+    public function append($chunk)
     {
         $this->add(new TextStringObject($chunk));
     }
 
-    public function getValue(): string
+    public function getValue()
     {
         $result = '';
         foreach ($this->data as $object) {
@@ -48,7 +46,7 @@ final class TextStringWithChunkObject extends AbstractCBORObject
         return $result;
     }
 
-    public function getLength(): int
+    public function getLength()
     {
         $length = 0;
         foreach ($this->data as $object) {
@@ -58,7 +56,7 @@ final class TextStringWithChunkObject extends AbstractCBORObject
         return $length;
     }
 
-    public function getNormalizedData(bool $ignoreTags = false): string
+    public function getNormalizedData($ignoreTags = false)
     {
         $result = '';
         foreach ($this->data as $object) {
@@ -68,7 +66,7 @@ final class TextStringWithChunkObject extends AbstractCBORObject
         return $result;
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         $result = parent::__toString();
         foreach ($this->data as $object) {

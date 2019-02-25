@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -21,7 +19,7 @@ final class GlobalTest extends BaseTestCase
      * @test
      * @dataProvider getDataSet
      */
-    public function aSignedIntegerCanBeParsed(string $data): void
+    public function aSignedIntegerCanBeParsed($data)
     {
         $stream = new StringStream(\Safe\hex2bin($data));
         $object = $this->getDecoder()->decode($stream);

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -27,12 +25,12 @@ final class BreakObject extends Base
         return [0b00011111];
     }
 
-    public static function createFromLoadedData(int $additionalInformation, ?string $data): Base
+    public static function createFromLoadedData($additionalInformation, $data): Base
     {
         return new self();
     }
 
-    public function getNormalizedData(bool $ignoreTags = false): bool
+    public function getNormalizedData($ignoreTags = false)
     {
         return false;
     }

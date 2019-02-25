@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -15,8 +13,8 @@ namespace CBOR;
 
 final class InfiniteListObject extends AbstractCBORObject implements \Countable, \IteratorAggregate
 {
-    private const MAJOR_TYPE = 0b100;
-    private const ADDITIONAL_INFORMATION = 0b00011111;
+     const MAJOR_TYPE = 0b100;
+     const ADDITIONAL_INFORMATION = 0b00011111;
 
     /**
      * @var CBORObject[]
@@ -28,19 +26,19 @@ final class InfiniteListObject extends AbstractCBORObject implements \Countable,
         parent::__construct(self::MAJOR_TYPE, self::ADDITIONAL_INFORMATION);
     }
 
-    public function getNormalizedData(bool $ignoreTags = false): array
+    public function getNormalizedData($ignoreTags = false): array
     {
         return array_map(function (CBORObject $item) use ($ignoreTags) {
             return $item->getNormalizedData($ignoreTags);
         }, $this->data);
     }
 
-    public function add(CBORObject $item): void
+    public function add(CBORObject $item)
     {
         $this->data[] = $item;
     }
 
-    public function count(): int
+    public function count()
     {
         return \count($this->data);
     }
@@ -50,7 +48,7 @@ final class InfiniteListObject extends AbstractCBORObject implements \Countable,
         return new \ArrayIterator($this->data);
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         $result = parent::__toString();
         foreach ($this->data as $object) {

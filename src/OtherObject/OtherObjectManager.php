@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -22,7 +20,7 @@ class OtherObjectManager
      */
     private $classes = [];
 
-    public function add(string $class): void
+    public function add($class)
     {
         foreach ($class::supportedAdditionalInformation() as $ai) {
             if ($ai < 0) {
@@ -32,12 +30,12 @@ class OtherObjectManager
         }
     }
 
-    public function getClassForValue(int $value): string
+    public function getClassForValue($value)
     {
         return array_key_exists($value, $this->classes) ? $this->classes[$value] : GenericObject::class;
     }
 
-    public function createObjectForValue(int $value, ?string $data): OtherObject
+    public function createObjectForValue($value, $data): OtherObject
     {
         /** @var OtherObject $class */
         $class = $this->getClassForValue($value);

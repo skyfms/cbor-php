@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -40,7 +38,7 @@ final class Decoder
         return $this->process($stream);
     }
 
-    private function process(Stream $stream, bool $breakable = false): CBORObject
+    private function process(Stream $stream, $breakable = false): CBORObject
     {
         $ib = \ord($stream->read(1));
         $mt = $ib >> 5;
@@ -64,7 +62,7 @@ final class Decoder
         return $this->processFinite($stream, $mt, $ai, $val);
     }
 
-    private function processFinite(Stream $stream, int $mt, int $ai, ?string $val): CBORObject
+    private function processFinite(Stream $stream, $mt, $ai, $val): CBORObject
     {
         switch ($mt) {
             case 0b000: //0
@@ -104,7 +102,7 @@ final class Decoder
         }
     }
 
-    private function processInfinite(Stream $stream, int $mt, bool $breakable): CBORObject
+    private function processInfinite(Stream $stream, $mt, bool $breakable): CBORObject
     {
         switch ($mt) {
             case 0b010: //2

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -15,20 +13,20 @@ namespace CBOR;
 
 final class SignedIntegerObject extends AbstractCBORObject
 {
-    private const MAJOR_TYPE = 0b001;
+     const MAJOR_TYPE = 0b001;
 
     /**
      * @var string|null
      */
     private $data;
 
-    public function __construct(int $additionalInformation, ?string $data)
+    public function __construct($additionalInformation, $data)
     {
         parent::__construct(self::MAJOR_TYPE, $additionalInformation);
         $this->data = $data;
     }
 
-    public static function createObjectForValue(int $additionalInformation, ?string $data): self
+    public static function createObjectForValue($additionalInformation, $data): self
     {
         return new self($additionalInformation, $data);
     }
@@ -66,12 +64,12 @@ final class SignedIntegerObject extends AbstractCBORObject
         return new self($ai, $data);
     }
 
-    public function getValue(): string
+    public function getValue()
     {
         return $this->getNormalizedData();
     }
 
-    public function getNormalizedData(bool $ignoreTags = false): string
+    public function getNormalizedData($ignoreTags = false)
     {
         if (null === $this->data) {
             return (string) (-1 - $this->additionalInformation);
@@ -84,7 +82,7 @@ final class SignedIntegerObject extends AbstractCBORObject
         return gmp_strval($result, 10);
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         $result = parent::__toString();
         if (null !== $this->data) {

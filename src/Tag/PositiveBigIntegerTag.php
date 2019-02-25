@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -19,12 +17,12 @@ use CBOR\TagObject as Base;
 
 final class PositiveBigIntegerTag extends Base
 {
-    public static function getTagId(): int
+    public static function getTagId()
     {
         return 2;
     }
 
-    public static function createFromLoadedData(int $additionalInformation, ?string $data, CBORObject $object): Base
+    public static function createFromLoadedData($additionalInformation, $data, CBORObject $object): Base
     {
         return new self($additionalInformation, $data, $object);
     }
@@ -38,7 +36,7 @@ final class PositiveBigIntegerTag extends Base
         return new self(2, null, $object);
     }
 
-    public function getNormalizedData(bool $ignoreTags = false)
+    public function getNormalizedData($ignoreTags = false)
     {
         if ($ignoreTags) {
             return $this->object->getNormalizedData($ignoreTags);

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -22,12 +20,12 @@ final class GenericObject extends Base
         return [];
     }
 
-    public static function createFromLoadedData(int $additionalInformation, ?string $data): Base
+    public static function createFromLoadedData($additionalInformation, $data): Base
     {
         return new self($additionalInformation, $data);
     }
 
-    public function getNormalizedData(bool $ignoreTags = false)
+    public function getNormalizedData($ignoreTags = false)
     {
         return $this->data;
     }

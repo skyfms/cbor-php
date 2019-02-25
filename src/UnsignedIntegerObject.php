@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -15,20 +13,20 @@ namespace CBOR;
 
 final class UnsignedIntegerObject extends AbstractCBORObject
 {
-    private const MAJOR_TYPE = 0b000;
+     const MAJOR_TYPE = 0b000;
 
     /**
      * @var string|null
      */
     private $data;
 
-    public function __construct(int $additionalInformation, ?string $data)
+    public function __construct($additionalInformation, $data)
     {
         parent::__construct(self::MAJOR_TYPE, $additionalInformation);
         $this->data = $data;
     }
 
-    public static function createObjectForValue(int $additionalInformation, ?string $data): self
+    public static function createObjectForValue($additionalInformation, $data): self
     {
         return new self($additionalInformation, $data);
     }
@@ -63,22 +61,22 @@ final class UnsignedIntegerObject extends AbstractCBORObject
         return new self($ai, $data);
     }
 
-    public function getMajorType(): int
+    public function getMajorType()
     {
         return self::MAJOR_TYPE;
     }
 
-    public function getAdditionalInformation(): int
+    public function getAdditionalInformation()
     {
         return $this->additionalInformation;
     }
 
-    public function getValue(): string
+    public function getValue()
     {
         return $this->getNormalizedData();
     }
 
-    public function getNormalizedData(bool $ignoreTags = false): string
+    public function getNormalizedData($ignoreTags = false)
     {
         if (null === $this->data) {
             return \strval($this->additionalInformation);
@@ -87,7 +85,7 @@ final class UnsignedIntegerObject extends AbstractCBORObject
         return gmp_strval(gmp_init(bin2hex($this->data), 16), 10);
     }
 
-    public function __toString(): string
+    public function __toString()
     {
         $result = parent::__toString();
         if (null !== $this->data) {

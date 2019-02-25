@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /*
  * The MIT License (MIT)
  *
@@ -26,7 +24,7 @@ final class TextStringWithChunkObjectTest extends BaseTestCase
      * @test
      * @dataProvider getData
      */
-    public function aTextStringWithChunkObjectCanBeCreated(array $chunks, int $expectedLength, string $expectedValue, string $expectedEncodedObject): void
+    public function aTextStringWithChunkObjectCanBeCreated(array $chunks, $expectedLength, $expectedValue, $expectedEncodedObject)
     {
         $object = new TextStringWithChunkObject();
         foreach ($chunks as $chunk) {
